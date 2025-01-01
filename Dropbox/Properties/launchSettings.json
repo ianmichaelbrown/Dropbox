@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Dropbox (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Dropbox (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
