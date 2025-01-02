@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Dropbox.Interfaces;
 
 namespace Dropbox
 {
-    class AppController
+    class AppController : IAppController
     {
+        public void StartSyncManager()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

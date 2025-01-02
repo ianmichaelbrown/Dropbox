@@ -1,12 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Dropbox.Interfaces;
 
 namespace Dropbox.Managers
 {
-    class FileManager
+    class FileManager : IFileManager
     {
+        public bool AddToCopyQueue(string path)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool AddToDeleteQueue(string path)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool CopyToTarget(string path)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public bool DeleteFromTarget(string path)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

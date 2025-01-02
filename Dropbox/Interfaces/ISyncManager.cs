@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Dropbox.Interfaces
+﻿namespace Dropbox.Interfaces
 {
     interface ISyncManager
     {
+        bool IsRunning { get; set; }
     }
 }

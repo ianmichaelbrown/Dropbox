@@ -9,4 +9,18 @@
     mc:Ignorable="d"
     Title="Dropbox">
 
+    <StackPanel>
+        <TextBlock>Input</TextBlock>
+        <StackPanel Orientation="Horizontal">
+            <TextBox></TextBox>
+            <Button>Select folder</Button>
+        </StackPanel>
+        <TextBlock>Target</TextBlock>
+        <StackPanel Orientation="Horizontal">
+            <TextBox></TextBox>
+            <Button>Select folder</Button>
+        </StackPanel>
+        <TextBox Text="(log messages)"></TextBox>
+        <Button>(sync state)</Button>
+    </StackPanel>
 </Window>

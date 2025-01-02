@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Dropbox.Interfaces;
 
 namespace Dropbox.Managers
 {
-    class SyncManager
+    class SyncManager : ISyncManager
     {
+        public bool IsRunning { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
     }
 }

@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Dropbox.Interfaces
+﻿namespace Dropbox.Interfaces
 {
     interface IFileManager
     {
+        bool CopyToTarget(string path);
+
+        bool DeleteFromTarget(string path);
+
+        bool AddToCopyQueue(string path);
+
+        bool AddToDeleteQueue(string path);
     }
 }
