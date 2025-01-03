@@ -4,9 +4,12 @@ namespace Dropbox
 {
     class AppController : IAppController
     {
-        public void StartSyncManager()
+        public AppController(IViewModel viewModel,
+                             IModel model,
+                             ISyncManager syncManager,
+                             IFileManager fileManager)
         {
-            throw new System.NotImplementedException();
+            //syncManager.Start();
         }
     }
 }

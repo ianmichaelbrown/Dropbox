@@ -1,9 +1,9 @@
-﻿using System;
-using System.Windows.Input;
+﻿using Dropbox.Interfaces;
+using System;
 
 namespace Dropbox.Commands
 {
-    partial class SyncStateCommand : ICommand
+    partial class SyncStateCommand : ISyncStateCommand
     {
         public event EventHandler? CanExecuteChanged;
 

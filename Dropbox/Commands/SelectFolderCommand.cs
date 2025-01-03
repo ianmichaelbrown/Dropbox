@@ -1,9 +1,9 @@
-﻿using System;
-using System.Windows.Input;
+﻿using Dropbox.Interfaces;
+using System;
 
 namespace Dropbox.Commands
 {
-    partial class SelectFolderCommand : ICommand
+    partial class SelectFolderCommand : ISelectFolderCommand
     {
         public event EventHandler? CanExecuteChanged;
 

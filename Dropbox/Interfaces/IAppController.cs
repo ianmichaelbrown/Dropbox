@@ -2,6 +2,5 @@
 {
     interface IAppController
     {
-        void StartSyncManager();
     }
 }

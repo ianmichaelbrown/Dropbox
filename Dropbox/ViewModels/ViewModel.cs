@@ -11,6 +11,13 @@ namespace Dropbox.ViewModels
         private string? _syncStatusText;
         private string? _syncButtonText;
 
+        public ViewModel(ISelectFolderCommand selectInputFolderCommand,
+                         ISelectFolderCommand selectTargetFolderCommand,
+                         ISyncStateCommand syncStateCommand)
+        {
+                
+        }
+
         string? InputFolderPath
         {
 			get => _inputFolderPath;

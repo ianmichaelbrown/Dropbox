@@ -4,6 +4,11 @@ namespace Dropbox.Managers
 {
     class FileManager : IFileManager
     {
+        public FileManager(IFileWatcherService fileWatcherService)
+        {
+            
+        }
+
         public bool AddToCopyQueue(string path)
         {
             throw new System.NotImplementedException();
