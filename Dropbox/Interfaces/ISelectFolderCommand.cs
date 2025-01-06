@@ -6,5 +6,7 @@ namespace Dropbox.Interfaces
     public interface ISelectFolderCommand : ICommand
     {
         FolderType FolderType { get; set; }
+
+        void RaiseCanExecuteChanged();
     }
 }

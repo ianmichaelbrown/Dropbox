@@ -19,9 +19,11 @@ namespace Dropbox.Interfaces
 
         bool IsSyncing { get; set; }
 
-        Queue<string> FileCopyPathQueue { get; set; }
+        bool CanStartStopSync { get; }
 
-        Queue<string> FileDeletePathQueue { get; set; }
+        Queue<string> FileCopyPathQueue { get; }
+
+        Queue<string> FileDeletePathQueue { get; }
 
         void SetInputPath(string path);
 

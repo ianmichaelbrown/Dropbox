@@ -27,10 +27,8 @@ namespace Dropbox.Helpers
             {
                 return folder.Path;
             }
-            else
-            {
-                return string.Empty;
-            }
+
+            return string.Empty;
         }
     }
 }

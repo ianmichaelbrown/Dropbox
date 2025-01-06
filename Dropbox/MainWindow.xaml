@@ -13,15 +13,16 @@
     <StackPanel x:Name="root">
         <TextBlock>Input</TextBlock>
         <StackPanel Orientation="Horizontal">
-            <TextBox MinWidth="500" Text="{Binding InputFolderPath}" />
+            <TextBox MinWidth="500" IsReadOnly="True" Text="{Binding InputFolderPath}" />
             <Button Command="{Binding SelectInputFolderCommand}">Select folder</Button>
         </StackPanel>
         <TextBlock>Target</TextBlock>
         <StackPanel Orientation="Horizontal">
-            <TextBox MinWidth="500" Text="{Binding TargetFolderPath}" />
+            <TextBox MinWidth="500" IsReadOnly="True" Text="{Binding TargetFolderPath}" />
             <Button Command="{Binding SelectTargetFolderCommand}">Select folder</Button>
         </StackPanel>
         <TextBox Text="(log messages)"></TextBox>
         <Button Content="{Binding SyncButtonText}" Command="{Binding SyncStateCommand}"></Button>
+        <TextBlock Text="{Binding SyncStatusText}" />
     </StackPanel>
 </Window>

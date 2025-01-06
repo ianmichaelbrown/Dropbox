@@ -16,12 +16,17 @@ namespace Dropbox.Commands
 
         public bool CanExecute(object? parameter)
         {
-            return true;
+            return _model.CanStartStopSync;
         }
 
         public void Execute(object? parameter)
         {
             _model.ToggleSyncState();
+        }
+
+        public void RaiseCanExecuteChanged()
+        {
+            CanExecuteChanged?.Invoke(this, new EventArgs());
         }
     }
 }

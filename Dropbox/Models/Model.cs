@@ -10,16 +10,20 @@ namespace Dropbox.Models
         public string? InputFolderPath { get; set; }
         public string? TargetFolderPath { get; set; }
         public bool IsSyncing { get; set; }
-        public Queue<string> FileCopyPathQueue { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-        public Queue<string> FileDeletePathQueue { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        public Queue<string> FileCopyPathQueue { get; private set; }
+        public Queue<string> FileDeletePathQueue { get; private set; }
 
         public event FolderPathUpdatedHandler? FolderPathUpdated;
         public event SyncStateChangedHandler? SyncStateChanged;
 
         public Model()
         {
+            FileCopyPathQueue = new();
+            FileDeletePathQueue = new();
             IsSyncing = false;
         }
+
+        public bool CanStartStopSync => !string.IsNullOrWhiteSpace(InputFolderPath) && !string.IsNullOrWhiteSpace(TargetFolderPath);
 
         public void SetInputPath(string path)
         {

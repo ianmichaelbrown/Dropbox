@@ -11,5 +11,7 @@
         bool? IsSyncing { get; set; }
 
         string? SyncButtonText {  get; set; }
+
+        string? SyncStatusText { get; set; }
     }
 }

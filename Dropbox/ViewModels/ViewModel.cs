@@ -8,6 +8,8 @@ namespace Dropbox.ViewModels
     {
         private readonly string StartSyncText = "Start Synchronising";
         private readonly string StopSyncText = "Stop Synchronising";
+        private readonly string SyncRunningStatusText = "Synchronising files...";
+        private readonly string SyncStoppedStatusText = "Synchronising stopped";
 
         private string? _inputFolderPath;
         private string? _targetFolderPath;
@@ -72,6 +74,7 @@ namespace Dropbox.ViewModels
                     OnPropertyChanged();
 
                     UpdateSyncButton();
+                    UpdateSyncStatus();
                 }
             }
         }
@@ -89,12 +92,12 @@ namespace Dropbox.ViewModels
             }
         }
 
-        string? SyncStatusText
+        public string? SyncStatusText
         {
             get => _syncStatusText;
             set
             {
-                if (null != _syncStatusText)
+                if (value != _syncStatusText)
                 {
                     _syncStatusText = value;
                     OnPropertyChanged();
@@ -115,6 +118,11 @@ namespace Dropbox.ViewModels
             SyncButtonText = (bool)IsSyncing! ? StopSyncText : StartSyncText;
         }
 
+        private void UpdateSyncStatus()
+        {
+            SyncStatusText = (bool)IsSyncing! ? SyncRunningStatusText : SyncStoppedStatusText;
+        }
+
         private void OnFolderPathUpdated(FolderType folderType, string path)
         {
             if (folderType == FolderType.Input)
@@ -125,11 +133,16 @@ namespace Dropbox.ViewModels
             {
                 TargetFolderPath = path;
             }
+
+            SyncStateCommand!.RaiseCanExecuteChanged();
         }
 
         private void OnSyncStateChanged(bool isSyncing)
         {
             IsSyncing = isSyncing;
+
+            SelectInputFolderCommand!.RaiseCanExecuteChanged();
+            SelectTargetFolderCommand!.RaiseCanExecuteChanged();
         }
     }
 }

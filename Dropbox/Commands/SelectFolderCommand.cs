@@ -22,21 +22,29 @@ namespace Dropbox.Commands
 
         public bool CanExecute(object? parameter)
         {
-            return true;
+            return !_model.IsSyncing;
         }
 
         public async void Execute(object? parameter)
         {
             var folderPath = await _folderHelper.GetFolderPathAsync();
 
-            if (FolderType == FolderType.Input)
+            if (!string.IsNullOrEmpty(folderPath))
             {
-                _model.SetInputPath(folderPath);
+                if (FolderType == FolderType.Input)
+                {
+                    _model.SetInputPath(folderPath);
+                }
+                else
+                {
+                    _model.SetTargetPath(folderPath);
+                }
             }
-            else
-            {
-                _model.SetTargetPath(folderPath);
-            }
+        }
+
+        public void RaiseCanExecuteChanged()
+        {
+            CanExecuteChanged?.Invoke(this, new EventArgs());
         }
     }
 }
