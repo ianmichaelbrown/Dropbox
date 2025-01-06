@@ -1,10 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using Dropbox.Enums;
+using System.Collections.Generic;
 
 namespace Dropbox.Interfaces
 {
     public interface IModel
     {
+        delegate void FolderPathUpdatedHandler(FolderType folderType, string path);
+        event FolderPathUpdatedHandler? FolderPathUpdated;
+
         delegate void SyncStateChangedHandler(bool isSyncing);
+        event SyncStateChangedHandler? SyncStateChanged;
 
         delegate void NewLogMessageHandler(string logMessage);
 
@@ -22,7 +27,7 @@ namespace Dropbox.Interfaces
 
         void SetTargetPath(string path);
 
-        void SetSyncState(bool isSyncing);
+        void ToggleSyncState();
 
         void AddToCopyQueue(string path);
 

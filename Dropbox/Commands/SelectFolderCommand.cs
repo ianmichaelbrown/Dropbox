@@ -31,11 +31,11 @@ namespace Dropbox.Commands
 
             if (FolderType == FolderType.Input)
             {
-                _model.InputFolderPath = folderPath;
+                _model.SetInputPath(folderPath);
             }
             else
             {
-                _model.TargetFolderPath = folderPath;
+                _model.SetTargetPath(folderPath);
             }
         }
     }

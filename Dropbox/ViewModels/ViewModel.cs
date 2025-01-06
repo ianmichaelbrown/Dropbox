@@ -1,5 +1,4 @@
-﻿using Dropbox.Commands;
-using Dropbox.Enums;
+﻿using Dropbox.Enums;
 using Dropbox.Interfaces;
 using System.Collections.ObjectModel;
 
@@ -7,28 +6,41 @@ namespace Dropbox.ViewModels
 {
     public partial class ViewModel : NotifiableBase, IViewModel
     {
+        private readonly string StartSyncText = "Start Synchronising";
+        private readonly string StopSyncText = "Stop Synchronising";
+
         private string? _inputFolderPath;
         private string? _targetFolderPath;
         private string? _syncStatusText;
         private string? _syncButtonText;
+        private bool? isSyncing;
 
         public ViewModel(ISelectFolderCommand selectInputFolderCommand,
                          ISelectFolderCommand selectTargetFolderCommand,
-                         ISyncStateCommand syncStateCommand)
+                         ISyncStateCommand syncStateCommand,
+                         IModel model)
         {
             SelectInputFolderCommand = selectInputFolderCommand;
             SelectInputFolderCommand.FolderType = FolderType.Input;
 
             SelectTargetFolderCommand = selectTargetFolderCommand;
             SelectTargetFolderCommand.FolderType = FolderType.Target;
+
+            SyncStateCommand = syncStateCommand;
+
+            model.FolderPathUpdated += OnFolderPathUpdated;
+
+            IsSyncing = model.IsSyncing;
+
+            model.SyncStateChanged += OnSyncStateChanged;
         }
 
-        string? InputFolderPath
+        public string? InputFolderPath
         {
 			get => _inputFolderPath;
 			set
             {
-                if (null != _inputFolderPath)
+                if (value != _inputFolderPath)
                 {
                     _inputFolderPath = value;
                     OnPropertyChanged();
@@ -36,12 +48,12 @@ namespace Dropbox.ViewModels
             }
 		}
 
-        string? TargetFolderPath
+        public string? TargetFolderPath
         {
             get => _targetFolderPath;
             set
             {
-                if (null != _targetFolderPath)
+                if (value != _targetFolderPath)
                 {
                     _targetFolderPath = value;
                     OnPropertyChanged();
@@ -49,12 +61,27 @@ namespace Dropbox.ViewModels
             }
         }
 
-        string? SyncButtonText
+        public bool? IsSyncing
+        {
+            get => isSyncing;
+            set
+            {
+                if (value != isSyncing)
+                {
+                    isSyncing = value;
+                    OnPropertyChanged();
+
+                    UpdateSyncButton();
+                }
+            }
+        }
+
+        public string? SyncButtonText
         {
             get => _syncButtonText;
             set
             {
-                if (null != _syncButtonText)
+                if (value != _syncButtonText)
                 {
                     _syncButtonText = value;
                     OnPropertyChanged();
@@ -79,8 +106,30 @@ namespace Dropbox.ViewModels
 
         public ISelectFolderCommand? SelectTargetFolderCommand { get; set; }
 
-        SyncStateCommand? SyncStateCommand { get; set; }
+        public ISyncStateCommand? SyncStateCommand { get; set; }
 
         ObservableCollection<string>? LogMessageList { get; set; }
+
+        private void UpdateSyncButton()
+        {
+            SyncButtonText = (bool)IsSyncing! ? StopSyncText : StartSyncText;
+        }
+
+        private void OnFolderPathUpdated(FolderType folderType, string path)
+        {
+            if (folderType == FolderType.Input)
+            {
+                InputFolderPath = path;
+            }
+            else
+            {
+                TargetFolderPath = path;
+            }
+        }
+
+        private void OnSyncStateChanged(bool isSyncing)
+        {
+            IsSyncing = isSyncing;
+        }
     }
 }
