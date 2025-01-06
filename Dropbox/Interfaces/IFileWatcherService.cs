@@ -1,6 +1,7 @@
 ﻿namespace Dropbox.Interfaces
 {
-    interface IFileWatcherService
+    public interface IFileWatcherService
     {
+        void Initialise();
     }
 }

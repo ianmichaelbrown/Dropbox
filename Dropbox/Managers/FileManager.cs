@@ -7,9 +7,12 @@ namespace Dropbox.Managers
         private IFolderHelper _folderDialogHelper;
 
         public FileManager(IFolderHelper folderDialogHelper,
-                           IFileWatcherService fileWatcherService)
+                           IFileWatcherService fileWatcherService,
+                           IModel model)
         {
             _folderDialogHelper = folderDialogHelper;
+
+            fileWatcherService.Initialise();
         }
 
         public string GetFolderPathAsync()
