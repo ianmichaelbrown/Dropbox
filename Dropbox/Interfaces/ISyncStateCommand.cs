@@ -2,7 +2,7 @@
 
 namespace Dropbox.Interfaces
 {
-    interface ISyncStateCommand : ICommand
+    public interface ISyncStateCommand : ICommand
     {
     }
 }

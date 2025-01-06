@@ -1,11 +1,11 @@
 ﻿using Dropbox.Interfaces;
+using Microsoft.UI.Xaml;
 
 namespace Dropbox
 {
     class AppController : IAppController
     {
-        public AppController(IViewModel viewModel,
-                             IModel model,
+        public AppController(IModel model,
                              ISyncManager syncManager,
                              IFileManager fileManager)
         {

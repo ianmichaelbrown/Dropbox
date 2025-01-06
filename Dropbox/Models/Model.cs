@@ -5,8 +5,8 @@ namespace Dropbox.Models
 {
     class Model : IModel
     {
-        public string InputFolderPath { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
-        public string TargetFolderPath { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
+        public string? InputFolderPath { get; set; }
+        public string? TargetFolderPath { get; set; }
         public bool IsSyncing { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
         public Queue<string> FileCopyPathQueue { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }
         public Queue<string> FileDeletePathQueue { get => throw new System.NotImplementedException(); set => throw new System.NotImplementedException(); }

@@ -7,18 +7,20 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
+    xmlns:commands="using:Dropbox.Commands"
+    xmlns:vms="using:Dropbox.ViewModels"
     Title="Dropbox">
 
-    <StackPanel>
+    <StackPanel x:Name="root">
         <TextBlock>Input</TextBlock>
         <StackPanel Orientation="Horizontal">
             <TextBox></TextBox>
-            <Button>Select folder</Button>
+            <Button Command="{Binding SelectInputFolderCommand}">Select folder</Button>
         </StackPanel>
         <TextBlock>Target</TextBlock>
         <StackPanel Orientation="Horizontal">
             <TextBox></TextBox>
-            <Button>Select folder</Button>
+            <Button Command="{Binding SelectTargetFolderCommand}">Select folder</Button>
         </StackPanel>
         <TextBox Text="(log messages)"></TextBox>
         <Button>(sync state)</Button>

@@ -1,6 +1,6 @@
 ﻿using Dropbox.Interfaces;
 
-namespace Dropbox.Helpers
+namespace Dropbox.Services
 {
     class FileWatcherService : IFileWatcherService
     {

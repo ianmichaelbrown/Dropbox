@@ -3,6 +3,7 @@ using Dropbox.Helpers;
 using Dropbox.Interfaces;
 using Dropbox.Managers;
 using Dropbox.Models;
+using Dropbox.Services;
 using Dropbox.ViewModels;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -20,6 +21,8 @@ namespace Dropbox
     {
         private Window? m_window;
         private IHost? _host;
+
+        public static MainWindow MainWindow = new();
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -42,8 +45,21 @@ namespace Dropbox
 
             var appController = _host.Services.GetRequiredService<IAppController>();
 
-            m_window = new MainWindow();
-            m_window.Activate();
+            //m_window = new MainWindow();
+            //var vm = _host.Services.GetRequiredService<IViewModel>();
+            //((MainWindow)m_window).Initialise(vm);
+
+            //var folderDialogHelper = _host.Services.GetRequiredService<IFolderHelper>();
+            //folderDialogHelper.Initialise(m_window);
+
+            //m_window.Activate();
+
+            var folderDialogHelper = _host.Services.GetRequiredService<IFolderHelper>();
+            folderDialogHelper.Initialise();// App.MainWindow);
+
+            var vm = _host.Services.GetRequiredService<IViewModel>();
+            MainWindow.Initialise(vm);
+            MainWindow.Activate();
         }
 
         private void Configure()
@@ -58,6 +74,8 @@ namespace Dropbox
                             services.AddSingleton<ISyncManager, SyncManager>();
                             // Services
                             services.AddSingleton<IFileWatcherService, FileWatcherService>();
+                            // Helpers
+                            services.AddSingleton<IFolderHelper, FolderHelper>();
                             // Commands
                             services.AddTransient<ISelectFolderCommand, SelectFolderCommand>();
                             services.AddSingleton<ISyncStateCommand, SyncStateCommand>();

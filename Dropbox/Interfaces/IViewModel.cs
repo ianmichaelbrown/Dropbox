@@ -1,6 +1,9 @@
-﻿namespace Dropbox.Interfaces
+﻿using Dropbox.Commands;
+
+namespace Dropbox.Interfaces
 {
-    interface IViewModel
+    public interface IViewModel
     {
+        ISelectFolderCommand? SelectInputFolderCommand { get; }
     }
 }

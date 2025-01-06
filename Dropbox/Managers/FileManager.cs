@@ -4,9 +4,17 @@ namespace Dropbox.Managers
 {
     class FileManager : IFileManager
     {
-        public FileManager(IFileWatcherService fileWatcherService)
+        private IFolderHelper _folderDialogHelper;
+
+        public FileManager(IFolderHelper folderDialogHelper,
+                           IFileWatcherService fileWatcherService)
         {
-            
+            _folderDialogHelper = folderDialogHelper;
+        }
+
+        public string GetFolderPathAsync()
+        {
+            return _folderDialogHelper.GetFolderPathAsync().Result;
         }
 
         public bool AddToCopyQueue(string path)

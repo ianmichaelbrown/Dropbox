@@ -1,8 +1,11 @@
-﻿using System.Windows.Input;
+﻿using Dropbox.Enums;
+using System.Windows.Input;
 
 namespace Dropbox.Interfaces
 {
-    interface ISelectFolderCommand : ICommand
+    public interface ISelectFolderCommand : ICommand
     {
+        //bool IsForInputFolder { get; set; }
+        FolderType FolderType { get; set; }
     }
 }

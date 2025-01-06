@@ -2,6 +2,8 @@
 {
     interface IFileManager
     {
+        string GetFolderPathAsync();
+
         bool CopyToTarget(string path);
 
         bool DeleteFromTarget(string path);

@@ -2,13 +2,13 @@
 
 namespace Dropbox.Interfaces
 {
-    interface IModel
+    public interface IModel
     {
         delegate void SyncStateChangedHandler(bool isSyncing);
 
         delegate void NewLogMessageHandler(string logMessage);
 
-        string InputFolderPath { get; set; }
+        string? InputFolderPath { get; set; }
 
         string TargetFolderPath { get; set; }
 

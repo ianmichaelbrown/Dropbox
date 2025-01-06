@@ -1,3 +1,4 @@
+using Dropbox.Interfaces;
 using Microsoft.UI.Xaml;
 
 // To learn more about WinUI, the WinUI project structure,
@@ -13,6 +14,11 @@ namespace Dropbox
         public MainWindow()
         {
             this.InitializeComponent();
+        }
+
+        public void Initialise(IViewModel viewModel)
+        {
+            root.DataContext = viewModel;
         }
     }
 }
