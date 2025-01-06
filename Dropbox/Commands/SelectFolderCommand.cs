@@ -11,8 +11,6 @@ namespace Dropbox.Commands
 
         public FolderType FolderType { get; set; }
 
-        //public bool IsForInputFolder { get; set; } = true;
-
         public event EventHandler? CanExecuteChanged;
 
         public SelectFolderCommand(IFolderHelper folderHelper,
@@ -29,23 +27,15 @@ namespace Dropbox.Commands
 
         public async void Execute(object? parameter)
         {
-            //bool isForInputFolder = true;
+            var folderPath = await _folderHelper.GetFolderPathAsync();
 
-            //if (parameter != null && bool.TryParse(parameter, out isForInputFolder))
+            if (FolderType == FolderType.Input)
             {
-                //bool isForInputFolder = (bool)parameter;
-                
-                var folderPath = await _folderHelper.GetFolderPathAsync();
-
-                //if (isForInputFolder)
-                if (FolderType == FolderType.Input)
-                {
-                    _model.InputFolderPath = folderPath;
-                }
-                else
-                {
-                    _model.TargetFolderPath = folderPath;
-                }
+                _model.InputFolderPath = folderPath;
+            }
+            else
+            {
+                _model.TargetFolderPath = folderPath;
             }
         }
     }

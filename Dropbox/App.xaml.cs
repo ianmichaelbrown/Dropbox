@@ -19,7 +19,6 @@ namespace Dropbox
     /// </summary>
     public partial class App : Application
     {
-        private Window? m_window;
         private IHost? _host;
 
         public static MainWindow MainWindow = new();
@@ -45,20 +44,12 @@ namespace Dropbox
 
             var appController = _host.Services.GetRequiredService<IAppController>();
 
-            //m_window = new MainWindow();
-            //var vm = _host.Services.GetRequiredService<IViewModel>();
-            //((MainWindow)m_window).Initialise(vm);
-
-            //var folderDialogHelper = _host.Services.GetRequiredService<IFolderHelper>();
-            //folderDialogHelper.Initialise(m_window);
-
-            //m_window.Activate();
-
             var folderDialogHelper = _host.Services.GetRequiredService<IFolderHelper>();
-            folderDialogHelper.Initialise();// App.MainWindow);
+            folderDialogHelper.Initialise();
 
             var vm = _host.Services.GetRequiredService<IViewModel>();
             MainWindow.Initialise(vm);
+
             MainWindow.Activate();
         }
 

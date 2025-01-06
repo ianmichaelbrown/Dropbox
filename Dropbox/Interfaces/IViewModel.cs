@@ -1,6 +1,4 @@
-﻿using Dropbox.Commands;
-
-namespace Dropbox.Interfaces
+﻿namespace Dropbox.Interfaces
 {
     public interface IViewModel
     {

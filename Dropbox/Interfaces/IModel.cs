@@ -10,7 +10,7 @@ namespace Dropbox.Interfaces
 
         string? InputFolderPath { get; set; }
 
-        string TargetFolderPath { get; set; }
+        string? TargetFolderPath { get; set; }
 
         bool IsSyncing { get; set; }
 
@@ -27,7 +27,7 @@ namespace Dropbox.Interfaces
         void AddToCopyQueue(string path);
 
         void AddToDeleteQueue(string path);
-        
+
         // remove from queues?
     }
 }

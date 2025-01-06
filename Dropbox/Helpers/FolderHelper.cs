@@ -1,8 +1,6 @@
 ﻿using Dropbox.Interfaces;
-using Microsoft.UI.Xaml;
 using System.Threading.Tasks;
 using System;
-using Windows.Storage.AccessCache;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 
@@ -12,14 +10,12 @@ namespace Dropbox.Helpers
     {
         private FolderPicker? _folderPicker;
 
-        public void Initialise()//Window? window)
+        public void Initialise()
         {
-            var window = App.MainWindow;
-
             _folderPicker = new FolderPicker();
             _folderPicker.FileTypeFilter.Add("*");
 
-            var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(window);
+            var hWnd = WinRT.Interop.WindowNative.GetWindowHandle(App.MainWindow);
             WinRT.Interop.InitializeWithWindow.Initialize(_folderPicker, hWnd);
         }
 
@@ -29,7 +25,6 @@ namespace Dropbox.Helpers
 
             if (folder != null)
             {
-                //StorageApplicationPermissions.FutureAccessList.AddOrReplace("PickedFolderToken", folder);
                 return folder.Path;
             }
             else

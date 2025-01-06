@@ -12,20 +12,14 @@ namespace Dropbox.ViewModels
         private string? _syncStatusText;
         private string? _syncButtonText;
 
-        //public ViewModel()
-        //{
-
-        //}
         public ViewModel(ISelectFolderCommand selectInputFolderCommand,
                          ISelectFolderCommand selectTargetFolderCommand,
                          ISyncStateCommand syncStateCommand)
         {
             SelectInputFolderCommand = selectInputFolderCommand;
-            //SelectInputFolderCommand.IsForInputFolder = true;
             SelectInputFolderCommand.FolderType = FolderType.Input;
 
             SelectTargetFolderCommand = selectTargetFolderCommand;
-            //SelectTargetFolderCommand.IsForInputFolder = false;
             SelectTargetFolderCommand.FolderType = FolderType.Target;
         }
 
