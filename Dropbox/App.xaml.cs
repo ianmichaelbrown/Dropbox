@@ -44,8 +44,8 @@ namespace Dropbox
 
             var appController = _host.Services.GetRequiredService<IAppController>();
 
-            var folderDialogHelper = _host.Services.GetRequiredService<IFolderHelper>();
-            folderDialogHelper.Initialise();
+            var folderHelper = _host.Services.GetRequiredService<IFolderHelper>();
+            folderHelper.Initialise();
 
             var vm = _host.Services.GetRequiredService<IViewModel>();
             vm.DispatcherQueue = MainWindow.DispatcherQueue;
@@ -69,6 +69,7 @@ namespace Dropbox
                             services.AddSingleton<IFileWatcherService, FileWatcherService>();
                             // Helpers
                             services.AddSingleton<IFolderHelper, FolderHelper>();
+                            services.AddSingleton<IFileHelper, FileHelper>();
                             // Commands
                             services.AddTransient<ISelectFolderCommand, SelectFolderCommand>();
                             services.AddSingleton<ISyncStateCommand, SyncStateCommand>();

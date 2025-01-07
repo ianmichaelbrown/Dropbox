@@ -5,14 +5,17 @@ namespace Dropbox.Managers
 {
     class FileManager : IFileManager
     {
-        private IFolderHelper _folderDialogHelper;
+        private IFolderHelper _folderHelper;
+        private IFileHelper _fileHelper;
         private IModel _model;
 
-        public FileManager(IFolderHelper folderDialogHelper,
-                           IFileWatcherService fileWatcherService,
+        public FileManager(IFileWatcherService fileWatcherService,
+                           IFolderHelper folderHelper,
+                           IFileHelper fileHelper,
                            IModel model)
         {
-            _folderDialogHelper = folderDialogHelper;
+            _folderHelper = folderHelper;
+            _fileHelper = fileHelper;
             _model = model;
 
             fileWatcherService.Initialise();
@@ -22,7 +25,7 @@ namespace Dropbox.Managers
 
         public string GetFolderPathAsync()
         {
-            return _folderDialogHelper.GetFolderPathAsync().Result;
+            return _folderHelper.GetFolderPathAsync().Result;
         }
 
         private void OnFileWatcherService_FileAdded(string path)
@@ -47,11 +50,11 @@ namespace Dropbox.Managers
             string filename = Path.GetFileName(path);
             var destPath = Path.Combine(_model.TargetFolderPath!, filename);
 
-            if (File.Exists(path))
+            if (_fileHelper.FileExists(path))
             {
                 try
                 {
-                    File.Copy(path, destPath, overwrite:true);
+                    _fileHelper.CopyFile(path, destPath, overwrite:true);
                     result = $"'{filename}' successfully synchronised with Target";
                 }
                 catch
@@ -69,11 +72,11 @@ namespace Dropbox.Managers
             string filename = Path.GetFileName(path);
             path = Path.Combine(_model.TargetFolderPath!, filename);
 
-            if (File.Exists(path))
+            if (_fileHelper.FileExists(path))
             {
                 try
                 {
-                    File.Delete(path);
+                    _fileHelper.DeleteFile(path);
                     result = $"'{filename}' no longer in Target";
                 }
                 catch
