@@ -12,6 +12,7 @@ namespace Dropbox.Models
 
         public event IModel.FolderPathUpdatedHandler? FolderPathUpdated;
         public event IModel.SyncStateChangedHandler? SyncStateChanged;
+        public event IModel.NewLogMessageHandler? NewLogMessage;
 
         public Model()
         {
@@ -47,7 +48,7 @@ namespace Dropbox.Models
 
             if (!string.IsNullOrWhiteSpace(message))
             {
-                // notify vm
+                NewLogMessage?.Invoke(message);
             }
         }
     }

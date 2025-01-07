@@ -11,6 +11,7 @@ namespace Dropbox.Interfaces
         event SyncStateChangedHandler? SyncStateChanged;
 
         delegate void NewLogMessageHandler(string logMessage);
+        event NewLogMessageHandler? NewLogMessage;
 
         string? InputFolderPath { get; set; }
 

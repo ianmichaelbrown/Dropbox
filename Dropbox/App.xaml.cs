@@ -48,9 +48,12 @@ namespace Dropbox
             folderDialogHelper.Initialise();
 
             var vm = _host.Services.GetRequiredService<IViewModel>();
+            vm.DispatcherQueue = MainWindow.DispatcherQueue;
             MainWindow.Initialise(vm);
 
             MainWindow.Activate();
+
+            MainWindow.AppWindow.Resize(new Windows.Graphics.SizeInt32(700,650));
         }
 
         private void Configure()

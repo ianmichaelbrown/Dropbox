@@ -10,19 +10,27 @@
     xmlns:vms="using:Dropbox.ViewModels"
     Title="Dropbox">
 
-    <StackPanel x:Name="root">
-        <TextBlock>Input</TextBlock>
-        <StackPanel Orientation="Horizontal">
+    <StackPanel x:Name="root" Margin="10">
+        <TextBlock FontWeight="Bold">Input</TextBlock>
+        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
             <TextBox MinWidth="500" IsReadOnly="True" Text="{Binding InputFolderPath}" />
-            <Button Command="{Binding SelectInputFolderCommand}">Select folder</Button>
+            <Button Margin="10,0" Command="{Binding SelectInputFolderCommand}">Select folder</Button>
         </StackPanel>
-        <TextBlock>Target</TextBlock>
-        <StackPanel Orientation="Horizontal">
+        <TextBlock Margin="0,20,0,0" FontWeight="Bold">Target</TextBlock>
+        <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
             <TextBox MinWidth="500" IsReadOnly="True" Text="{Binding TargetFolderPath}" />
-            <Button Command="{Binding SelectTargetFolderCommand}">Select folder</Button>
+            <Button Margin="10,0" Command="{Binding SelectTargetFolderCommand}">Select folder</Button>
         </StackPanel>
-        <TextBox Text="(log messages)"></TextBox>
-        <Button Content="{Binding SyncButtonText}" Command="{Binding SyncStateCommand}"></Button>
-        <TextBlock Text="{Binding SyncStatusText}" />
+        <Border Margin="0,20" BorderThickness="2" BorderBrush="LightGray" CornerRadius="5">
+            <ListBox Margin="5" Height="300" ItemsSource="{Binding LogMessageList, Mode=OneWay}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock TextLineBounds="Tight" Text="{Binding}" />
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+        <Button HorizontalAlignment="Stretch" Content="{Binding SyncButtonText}" Background="{Binding SyncButtonColour}" Command="{Binding SyncStateCommand}" />
+        <TextBlock Margin="0,10" Text="{Binding SyncStatusText}"/>
     </StackPanel>
 </Window>

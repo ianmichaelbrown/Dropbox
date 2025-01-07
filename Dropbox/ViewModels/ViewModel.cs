@@ -1,5 +1,8 @@
 ﻿using Dropbox.Enums;
 using Dropbox.Interfaces;
+using Microsoft.UI;
+using Microsoft.UI.Dispatching;
+using Microsoft.UI.Xaml.Media;
 using System.Collections.ObjectModel;
 
 namespace Dropbox.ViewModels
@@ -9,7 +12,7 @@ namespace Dropbox.ViewModels
         private readonly string StartSyncText = "Start Synchronising";
         private readonly string StopSyncText = "Stop Synchronising";
         private readonly string SyncRunningStatusText = "Synchronising files...";
-        private readonly string SyncStoppedStatusText = "Synchronising stopped";
+        private readonly string SyncStoppedStatusText = "Synchronisation stopped";
 
         private string? _inputFolderPath;
         private string? _targetFolderPath;
@@ -35,7 +38,12 @@ namespace Dropbox.ViewModels
             IsSyncing = model.IsSyncing;
 
             model.SyncStateChanged += OnSyncStateChanged;
+
+            LogMessageList = new();
+            model.NewLogMessage += OnNewLogMessage;
         }
+
+        public DispatcherQueue DispatcherQueue { get; set; }
 
         public string? InputFolderPath
         {
@@ -72,6 +80,7 @@ namespace Dropbox.ViewModels
                 {
                     isSyncing = value;
                     OnPropertyChanged();
+                    OnPropertyChanged(nameof(SyncButtonColour));
 
                     UpdateSyncButton();
                     UpdateSyncStatus();
@@ -92,6 +101,8 @@ namespace Dropbox.ViewModels
             }
         }
 
+        public SolidColorBrush SyncButtonColour => (bool)IsSyncing! ? new SolidColorBrush(Colors.Coral) : new SolidColorBrush(Colors.CornflowerBlue);
+
         public string? SyncStatusText
         {
             get => _syncStatusText;
@@ -111,7 +122,7 @@ namespace Dropbox.ViewModels
 
         public ISyncStateCommand? SyncStateCommand { get; set; }
 
-        ObservableCollection<string>? LogMessageList { get; set; }
+        public ObservableCollection<string>? LogMessageList { get; set; }
 
         private void UpdateSyncButton()
         {
@@ -143,6 +154,11 @@ namespace Dropbox.ViewModels
 
             SelectInputFolderCommand!.RaiseCanExecuteChanged();
             SelectTargetFolderCommand!.RaiseCanExecuteChanged();
+        }
+
+        private void OnNewLogMessage(string logMessage)
+        {
+            DispatcherQueue.TryEnqueue(() => LogMessageList!.Add(logMessage));
         }
     }
 }
