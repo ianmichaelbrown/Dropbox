@@ -1,6 +1,5 @@
 ﻿using Dropbox.Enums;
 using Dropbox.Interfaces;
-using System;
 using System.Diagnostics;
 using System.IO;
 
@@ -11,6 +10,9 @@ namespace Dropbox.Services
         private IModel _model;
         private FileSystemWatcher? _watcher;
         private bool _isInitialised;
+
+        public event IFileWatcherService.FileAddedHandler? FileAdded;
+        public event IFileWatcherService.FileRemovedHandler? FileRemoved;
 
         public FileWatcherService(IModel model)
         {
@@ -26,8 +28,6 @@ namespace Dropbox.Services
             {
                 _watcher = new FileSystemWatcher();
                 _watcher.Created += OnCreated;
-                _watcher.Changed += OnChanged;
-                _watcher.Renamed += OnRenamed;
                 _watcher.Deleted += OnDeleted;
                 _watcher.Error += OnError;
 
@@ -37,11 +37,7 @@ namespace Dropbox.Services
 
                 _watcher.IncludeSubdirectories = false;
 
-                //_watcher.InternalBufferSize = 65535;
-
                 _isInitialised = true;
-
-                //EnableWatcher();
             }
         }
 
@@ -63,35 +59,21 @@ namespace Dropbox.Services
 
         private void OnCreated(object sender, FileSystemEventArgs e)
         {
-            //DisableWatcher();
-            ////_fileManager.AddFile(e.FullPath);
-            //EnableWatcher();
             Debug.WriteLine($"Created {e.FullPath}");
-        }
 
-        private void OnChanged(object sender, FileSystemEventArgs e)
-        {
-            Debug.WriteLine($"Changed {e.FullPath}");
-        }
-
-        private void OnRenamed(object sender, RenamedEventArgs e)
-        {
-            Debug.WriteLine($"Renamed {e.FullPath}");
+            FileAdded?.Invoke(e.FullPath);
         }
 
         private void OnDeleted(object sender, FileSystemEventArgs e)
         {
             Debug.WriteLine($"Deleted {e.FullPath}");
+
+            FileRemoved?.Invoke(e.FullPath);
         }
 
         private void OnError(object sender, ErrorEventArgs e)
         {
-            //message = $"*** FileSystemWatcher exception: '{e.GetException().Message}' ***";
-
-            //Debug.WriteLine(message);
-            //Log.Error(message);
-            //((App)Application.Current).ShowTaskbarBalloon(message, BalloonIcon.Warning);
-            //Thread.Sleep(3000);
+            Debug.WriteLine($"*** FileSystemWatcher exception: '{e.GetException().Message}' ***");
         }
 
         private void OnFolderPathUpdated(FolderType folderType, string path)

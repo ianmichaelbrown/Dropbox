@@ -62,7 +62,6 @@ namespace Dropbox
                             services.AddSingleton<IAppController, AppController>();
                             // Managers
                             services.AddSingleton<IFileManager, FileManager>();
-                            services.AddSingleton<ISyncManager, SyncManager>();
                             // Services
                             services.AddSingleton<IFileWatcherService, FileWatcherService>();
                             // Helpers

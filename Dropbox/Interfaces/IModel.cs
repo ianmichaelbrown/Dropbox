@@ -1,5 +1,4 @@
 ﻿using Dropbox.Enums;
-using System.Collections.Generic;
 
 namespace Dropbox.Interfaces
 {
@@ -21,20 +20,12 @@ namespace Dropbox.Interfaces
 
         bool CanStartStopSync { get; }
 
-        Queue<string> FileCopyPathQueue { get; }
-
-        Queue<string> FileDeletePathQueue { get; }
-
         void SetInputPath(string path);
 
         void SetTargetPath(string path);
 
         void ToggleSyncState();
 
-        void AddToCopyQueue(string path);
-
-        void AddToDeleteQueue(string path);
-
-        // remove from queues?
+        void AddLogMessage(string message);
     }
 }

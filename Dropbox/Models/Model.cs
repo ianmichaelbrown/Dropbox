@@ -1,7 +1,6 @@
 ﻿using Dropbox.Enums;
 using Dropbox.Interfaces;
-using System.Collections.Generic;
-using static Dropbox.Interfaces.IModel;
+using System.Diagnostics;
 
 namespace Dropbox.Models
 {
@@ -10,16 +9,12 @@ namespace Dropbox.Models
         public string? InputFolderPath { get; set; }
         public string? TargetFolderPath { get; set; }
         public bool IsSyncing { get; set; }
-        public Queue<string> FileCopyPathQueue { get; private set; }
-        public Queue<string> FileDeletePathQueue { get; private set; }
 
-        public event FolderPathUpdatedHandler? FolderPathUpdated;
-        public event SyncStateChangedHandler? SyncStateChanged;
+        public event IModel.FolderPathUpdatedHandler? FolderPathUpdated;
+        public event IModel.SyncStateChangedHandler? SyncStateChanged;
 
         public Model()
         {
-            FileCopyPathQueue = new();
-            FileDeletePathQueue = new();
             IsSyncing = false;
         }
 
@@ -46,14 +41,14 @@ namespace Dropbox.Models
             SyncStateChanged?.Invoke(IsSyncing);
         }
 
-        public void AddToCopyQueue(string path)
+        public void AddLogMessage(string message)
         {
-            throw new System.NotImplementedException();
-        }
+            Debug.WriteLine("Log message: " + message);
 
-        public void AddToDeleteQueue(string path)
-        {
-            throw new System.NotImplementedException();
+            if (!string.IsNullOrWhiteSpace(message))
+            {
+                // notify vm
+            }
         }
     }
 }
