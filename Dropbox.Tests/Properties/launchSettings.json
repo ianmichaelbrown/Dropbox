@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "Dropbox.Tests (Package)": {
+      "commandName": "MsixPackage"
+    },
+    "Dropbox.Tests (Unpackaged)": {
+      "commandName": "Project"
+    }
+  }
+}
