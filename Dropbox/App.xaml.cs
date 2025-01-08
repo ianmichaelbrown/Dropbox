@@ -53,7 +53,7 @@ namespace Dropbox
 
             MainWindow.Activate();
 
-            MainWindow.AppWindow.Resize(new Windows.Graphics.SizeInt32(700,650));
+            MainWindow.AppWindow.Resize(new Windows.Graphics.SizeInt32(700,700));
         }
 
         private void Configure()

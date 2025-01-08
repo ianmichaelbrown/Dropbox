@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace Dropbox.Models
 {
-    class Model : IModel
+    public class Model : IModel
     {
         public string? InputFolderPath { get; set; }
         public string? TargetFolderPath { get; set; }

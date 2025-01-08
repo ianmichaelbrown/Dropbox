@@ -22,7 +22,7 @@
             <Button Margin="10,0" Command="{Binding SelectTargetFolderCommand}">Select folder</Button>
         </StackPanel>
         <Border Margin="0,20" BorderThickness="2" BorderBrush="LightGray" CornerRadius="5">
-            <ListBox Margin="5" Height="300" ItemsSource="{Binding LogMessageList, Mode=OneWay}">
+            <ListBox Margin="5" Height="350" ItemsSource="{Binding LogMessageList, Mode=OneWay}">
                 <ListBox.ItemTemplate>
                     <DataTemplate>
                         <TextBlock TextLineBounds="Tight" Text="{Binding}" />

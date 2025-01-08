@@ -1,9 +1,11 @@
 ﻿using Dropbox.Interfaces;
+using System;
+using System.Diagnostics;
 using System.IO;
 
 namespace Dropbox.Managers
 {
-    class FileManager : IFileManager
+    public class FileManager : IFileManager
     {
         private IFolderHelper _folderHelper;
         private IFileHelper _fileHelper;
@@ -57,9 +59,10 @@ namespace Dropbox.Managers
                     _fileHelper.CopyFile(path, destPath, overwrite:true);
                     result = $"'{filename}' successfully synchronised with Target";
                 }
-                catch
+                catch (Exception ex)
                 {
                     result = $"*** Failed to synchronise '{filename}' with Target";
+                    Debug.WriteLine($"{result}{Environment.NewLine}{ex.Message}{ex.StackTrace}");
                 }
             }
 
@@ -79,9 +82,10 @@ namespace Dropbox.Managers
                     _fileHelper.DeleteFile(path);
                     result = $"'{filename}' no longer in Target";
                 }
-                catch
+                catch (Exception ex)
                 {
                     result = $"*** Failed to delete '{filename}' from Target";
+                    Debug.WriteLine($"{result}{Environment.NewLine}{ex.Message}{ex.StackTrace}");
                 }
             }
 

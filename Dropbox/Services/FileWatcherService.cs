@@ -5,7 +5,7 @@ using System.IO;
 
 namespace Dropbox.Services
 {
-    class FileWatcherService : IFileWatcherService
+    public class FileWatcherService : IFileWatcherService
     {
         private IModel _model;
         private FileSystemWatcher? _watcher;

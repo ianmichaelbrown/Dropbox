@@ -1,6 +1,6 @@
 ﻿namespace Dropbox.Interfaces
 {
-    interface IFileManager
+    public interface IFileManager
     {
         string GetFolderPathAsync();
     }
